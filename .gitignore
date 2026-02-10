@@ -5,7 +5,7 @@ backend/bin/
 backend/tmp/
 backend/go.sum
 
-server
+**/main
 
 frontend/node_modules/
 frontend/dist/
