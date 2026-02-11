@@ -1,13 +1,13 @@
-FROM golang:1.23.12-alpine
+FROM golang:1.25-alpine
 
 WORKDIR /backend
+#install Air for hot-realoading
 
-COPY go.mod go.sum ./
+RUN go install github.com/air-verse/air@latest
 
-RUN go mod donwload 
+COPY go.mod go.sum* ./
 
+RUN go mod download 
 COPY . .
 
-RUN go build -v -o /usr/local/bin/app ./..
-
-CMD ["app"]
+CMD ["air", "--build.cmd","go build -o cmd/app/main cmd/app/main.go", "--build.bin","./cmd/app/main"]
